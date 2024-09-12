@@ -10,12 +10,10 @@ def contact(request):
  return HttpResponseRedirect("/about")
 def details(request):
  return HttpResponsePermanentRedirect("/")
-def products(request, productid):
-    category = request.GET.get("cat", "")
-    output = "<h2>Продукт № {0} Категория: {1}</h2>" .format(productid, category)
+def products(request, productid = 1):
+    output = "<h2>Продукт № {0}</h2>".format(productid)
     return HttpResponse(output)
-def users(request):
-    id = request.GET.get("id", 1)
-    name = request.GET.get("name", "Максим")
-    output = "<h2>Пользователь</h2><h3>id: {0} Имя: {1}</h3 >" .format(id, name)
+
+def users(request,id=1, name='Максим'):
+    output = "<h2>Пользователь</h2><h3>id: {0} Имя: {1} </h3> ".format(id,name)
     return HttpResponse(output)
