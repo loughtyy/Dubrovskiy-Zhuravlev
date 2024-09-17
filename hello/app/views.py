@@ -4,7 +4,7 @@ from django.http import *
 
 def index(request):
  
- return render(request, "app/home.html")
+ return render(request, "app/index.html")
 
 
 def about(request):

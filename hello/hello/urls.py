@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import re_path
+from django.views.generic import TemplateView
 from app import views
 urlpatterns = [
  path("", views. index),
- re_path(r'^about', views.about),
- re_path(r'^contact', views.contact),
+ path('about/', TemplateView.as_view(template_name="app/about.html")),
+ path('contact/', TemplateView.as_view(template_name="app/contact.html",
+ extra_context={"work": "Разработка программных продуктов"})),
  path('details/', views.details),
  path('products/', views.products),
  path('products/<int:productid>/', views.products),
