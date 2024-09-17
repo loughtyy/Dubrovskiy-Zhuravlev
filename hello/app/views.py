@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.http import *
 
 def index(request):
- 
- return render(request, "app/index.html")
+ cat = ["Ноутбуки", "Принтеры", "Сканеры", "Диски", "Шнуры"]
+ return render(request, "app/index.html", context={"cat": cat})
 
 
 def about(request):
