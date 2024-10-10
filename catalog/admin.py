@@ -26,14 +26,16 @@ class BookAdmin(admin.ModelAdmin):
   inlines = [BooksInstanceInline]
 
 @admin.register(BookInstance)
-class BookInstanceAdmin(admin.ModelAdmin): 
-  list_filter = ('book', 'status')
-  fieldsets = (
-  ('Экземпляр книги', {
-  'fields': ('book', 'imprint', 'inv_nom')
-  }),
-  ('Статус и окончание его действия', {
-  'fields': ('status', 'due_back')
-  }),
-  )
-
+class BookInstanceAdmin(admin.ModelAdmin):
+ list_display = ('book', 'status', 'borrower', 'due_back', 'id')
+ list_filter = ('status', 'due_back')
+ fieldsets = (
+ (None, {
+ 'fields': ('book', 'imprint', 'inv_nom')
+ }),
+ ('Availability', {
+ 'fields': ('status', 'due_back', 'borrower')
+ }),
+ )
+ def borowwer(self):
+    BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')
